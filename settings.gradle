@@ -1,0 +1,2 @@
+rootProject.name='PeTinder'
+include ':app'
