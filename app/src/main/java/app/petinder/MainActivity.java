@@ -86,7 +86,7 @@ public class MainActivity extends AppCompatActivity {
             public void onRightCardExit(Object dataObject) {
                 cards obj = (cards) dataObject;
                 String userId =obj.getUserId();
-                usersDb.child(userId).child("connections").child("yep").child(currentUid).setValue(true);
+                usersDb.child(userId).child("connections").child("matches").child(currentUid).setValue(true);
                 isConnectionMatch(userId);
                 Toast.makeText(MainActivity.this, "Right", Toast.LENGTH_SHORT).show();
             }
@@ -177,7 +177,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onChildAdded(@NonNull DataSnapshot dataSnapshot, @Nullable String s) {
 
-                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUid) && !dataSnapshot.child("connections").child("yep").hasChild(currentUid) && dataSnapshot.child("sex").getValue().toString().equals(oppositeUserSex)){
+                if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUid) && !dataSnapshot.child("connections").child("matches").hasChild(currentUid) && dataSnapshot.child("sex").getValue().toString().equals(oppositeUserSex)){
 
                     String profileImageUrl = "default";
 
