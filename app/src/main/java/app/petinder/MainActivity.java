@@ -200,7 +200,13 @@ public class MainActivity extends AppCompatActivity {
 
                 if (dataSnapshot.exists() && !dataSnapshot.child("connections").child("nope").hasChild(currentUid) && !dataSnapshot.child("connections").child("yep").hasChild(currentUid)){
 
-                    cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString());
+                    String profileImageUrl = "default";
+
+                    if (!dataSnapshot.child("profileImageUrl").getValue().equals("default")){
+                        profileImageUrl = dataSnapshot.child("profileImageUrl").getValue().toString();
+                    }
+
+                    cards item = new cards(dataSnapshot.getKey(), dataSnapshot.child("name").getValue().toString(), profileImageUrl);
                     rowItems.add(item);
                     arrayAdapter.notifyDataSetChanged();
                 }

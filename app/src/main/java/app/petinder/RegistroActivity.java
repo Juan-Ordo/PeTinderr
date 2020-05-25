@@ -20,6 +20,9 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class RegistroActivity extends AppCompatActivity {
 
     private Button mRegistro;
@@ -81,8 +84,14 @@ public class RegistroActivity extends AppCompatActivity {
                             Toast.makeText(RegistroActivity.this, "Error de inicio", Toast.LENGTH_SHORT).show();
                         }else{
                             String userId = mAuth.getCurrentUser().getUid();
-                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId).child("name");
-                            currentUserDb.setValue(name);
+                            DatabaseReference currentUserDb = FirebaseDatabase.getInstance().getReference().child("Users").child(radioButton.getText().toString()).child(userId);
+
+                            Map userInfo =new HashMap<>();
+                            userInfo.put("name", name);
+                            userInfo.put("profileImageUrl", "default");
+
+
+                            currentUserDb.updateChildren(userInfo);
                         }
                     }
                 });
